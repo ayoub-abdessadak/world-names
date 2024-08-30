@@ -1,3 +1,1 @@
-
-
-x = 10
+import random, string

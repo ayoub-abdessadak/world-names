@@ -30,7 +30,7 @@ program_flow = {
             "assign":"database",
             "valid":False,
             "next":3,
-        }
+    }
 }
 
 class PopulateDatabase:
