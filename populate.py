@@ -5,33 +5,34 @@ from databases import Databases
 import os
 
 program_flow = {
-    1:{
-        "title":"DATABASE\n",
-        "question":"Kies een database: ",
-        "action":"call",
-        "options":f"1. MySQL",
-        "enum":Databases,
-        "option_values":{
-            "1":"mysql"
+    1: {
+        "title": "DATABASE\n",
+        "question": "Kies een database: ",
+        "action": "call",
+        "options": f"1. MySQL",
+        "enum": Databases,
+        "option_values": {
+            "1": "mysql"
         },
-        "assign":"database",
-        "valid":False,
-        "next":3,
+        "assign": "database",
+        "valid": False,
+        "next": 3,
     },
-    3:{
-            "title":"DATABASE\n",
-            "question":"Kies een database: ",
-            "action":"call",
-            "options":f"1. MySQL",
-            "enum":Databases,
-            "option_values":{
-                "1":"mysql"
+    3: {
+            "title": "DATABASE\n",
+            "question": "Kies een database: ",
+            "action": "call",
+            "options": f"1. MySQL",
+            "enum": Databases,
+            "option_values": {
+                "1": "mysql"
             },
-            "assign":"database",
-            "valid":False,
-            "next":3,
+            "assign": "database",
+            "valid": False,
+            "next": 3,
     }
 }
+
 
 class PopulateDatabase:
 
@@ -59,9 +60,9 @@ class PopulateDatabase:
                 _next = flow["next"]
                 continue
 
-
     def __repr__(self):
         return f"""Database: Nothing"""
+
 
 if __name__ == "__main__":
     pd = PopulateDatabase()

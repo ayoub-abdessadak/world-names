@@ -9,6 +9,7 @@ import sys
 operating_system = "unix"
 clear = "clear" if operating_system == "unix" else "cls"
 
+
 class MySQL:
 
     def __init__(self):
@@ -74,7 +75,8 @@ class MySQL:
         self.cnx.close()
 
     def __repr__(self):
-        return f"Gebruiker: {self.user_name}\nPassword: {self.password}\nHost: {self.host}\nPoort: {self.port}\nConnection: {"Valid" if self.connection_attempt else "Invalid"}\n--------------"
+        return f"Gebruiker: {self.user_name}\nPassword: {self.password}\nHost: {self.host}\nPoort: {self.port}\nConnection: {'Valid' if self.connection_attempt else 'Invalid'}\n--------------"
+
 
 if __name__ == '__main__':
     mq = MySQL()
