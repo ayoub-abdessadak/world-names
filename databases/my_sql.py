@@ -34,8 +34,6 @@ class MySQL(SqlShared):
             os.system(clear)
             console.print(logo)
             custom_print("Om een verbinding te kunnen maken met jouw MySQL database. Dien je de volgende informatie in te vullen: \n")
-            if True in self.validators.values():
-                custom_print(self)
             if not self.validators['user_name']:
                 self.user_name = input("Gebruikersnaam: ").strip()
                 self.validators['user_name'] = True
