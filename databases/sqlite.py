@@ -39,7 +39,7 @@ class Sqlite:
             self.table_name = table_name
             return table_name
         else:
-            print(f"Het is niet gelukt om table {table_name} te maken.")
+            print(f"Het is niet gelukt om de tabel {table_name} te maken.")
 
     def add_user(self, user: tuple, table_name: str="Users"):
         if not isinstance(table_name, str):
