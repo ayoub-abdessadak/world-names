@@ -65,7 +65,7 @@ class SqlShared:
         input("Klik op enter om verder te gaan...")
 
     def search_user(self, cursor:_cursor, search_input: str=None, table_name: str = "Users"):
-        print("Type exit om de zoekfunctie te verlaten\n")
+        print("Typ exit om de zoekfunctie te verlaten\n")
         search_input = input("Zoek: ") if not search_input else search_input
         if search_input.lower().strip() == "exit":
             return "exit"

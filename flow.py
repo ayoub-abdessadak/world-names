@@ -3,25 +3,25 @@
 import time
 from databases import Databases
 import os
+from colorama import Fore, Back, Style, init
 
 program = {
 
     1: {
-        "title": "Programma: User Populater WorldNames - Een programma om fictionele gebruikers aan te maken\n",
+        "title": "User Populater WorldNames - Een programma om fictieve gebruikers aan te maken",
         "question": "Klik op enter om door te gaan...",
         "action": "",
         "options": f"",
         "enum": None,
-        "option_values": {
-            "1": "mysql"
-        },
+        "option_values": None,
         "assign": None,
         "valid": False,
         "next": 2,
+        "color":Fore.GREEN,
     },
     2: {
-        "title": "Simulatie (in dit programma wordt een simulatie uitgevoerd voor het populeren van een database)",
-        "question": "Maak een keuze: ",
+        "title": "Simulatie (in dit programma wordt een simulatie uitgevoerd voor het populeren van een database)\n",
+        "question": "\nMaak een keuze: ",
         "action": "call",
         "options": f"1. Simuleren via MySQL\n2. Simuleren via SqlLite",
         "enum": Databases,
@@ -32,10 +32,11 @@ program = {
         "assign": "database",
         "valid": False,
         "next": 3,
+        "color":Fore.GREEN,
     },
     3: {
-        "title": "Simulatie Hoofdmenu\n",
-        "question": "Kies een database: ",
+        "title": "WorldNames Hoofdmenu\n",
+        "question": "\nKies een database: ",
         "action": "flow",
         "options": f"1. Om opnieuw een simulatie uit te voeren\n2. Om het programma te verlaten",
         "enum": Databases,
@@ -46,6 +47,7 @@ program = {
         "assign": "database",
         "valid": False,
         "next": 3,
+        "color":Fore.GREEN,
     },
 }
 

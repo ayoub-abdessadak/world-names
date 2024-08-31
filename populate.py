@@ -5,34 +5,35 @@ from databases import Databases
 import os
 from flow import program
 import sys
+from rich.console import Console
+from content import logo, icon
+
+console = Console()
 
 class PopulateDatabase:
 
     def __init__(self):
         self.database = None
-
-    def __set_valid(self, flow):
-        flow["valid"] = True
+        self.showed_icon = False
 
     def run_program(self, program_flow):
         _next = 1
         while True:
             if _next == -1:
                 sys.exit()
-            os.system("clear")
-            print(self)
+
             flow = program_flow[_next]
-            print(flow["title"])
-            print(flow["options"])
+            os.system("clear")
+            console.print(self.__logo())
+            print(flow["color"] + f'''\n{flow["title"]}\n{flow["options"]}''')
             choice = input(flow["question"])
+
             if flow["action"] == "call":
-                output = flow['enum'][flow['option_values'][choice.strip()]].value()
-                output.run()
-                setattr(self, flow['assign'], output)
-                _next = flow["next"]
-            elif flow["action"] == "flow":
                 try:
-                    _next = flow["option_values"][choice.strip()]
+                    output = flow['enum'][flow['option_values'][choice.strip()]].value()
+                    output.run()
+                    _next = flow["next"]
+                    continue
                 except KeyError:
                     print("De opgegeven keuze is ongeldig.")
                     time.sleep(2)
@@ -40,12 +41,29 @@ class PopulateDatabase:
                 except Exception as error:
                     print(f"Something went wrong, make a issue on GIT, for {error}")
                     sys.exit()
-            else:
+
+            if flow["action"] == "flow":
+                try:
+                    _next = flow["option_values"][choice.strip()]
+                    continue
+                except KeyError:
+                    print("De opgegeven keuze is ongeldig.")
+                    time.sleep(2)
+                    continue
+                except Exception as error:
+                    print(f"Something went wrong, make a issue on GIT, for {error}")
+                    sys.exit()
+
+            if not flow["action"]:
                 _next = flow["next"]
                 continue
 
-    def __repr__(self):
-        return f"""Database: Nothing"""
+    def __logo(self):
+        if not self.showed_icon:
+            self.showed_icon = True
+            return logo + icon
+        else:
+            return logo
 
 
 if __name__ == "__main__":
