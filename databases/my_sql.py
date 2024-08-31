@@ -9,7 +9,7 @@ from mysql.connector import cursor
 #3th part imports
 from mysql.connector import errorcode
 from rich.console import Console
-from content import logo, icon
+from content import logo
 from content import custom_print
 
 operating_system = "unix"

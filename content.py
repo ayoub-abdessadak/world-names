@@ -1,7 +1,7 @@
 from rich.text import Text
 from colorama import Fore
 
-def custom_print(*args, **kwargs) -> print:
+def custom_print(*args, **kwargs) -> None:
     print(Fore.GREEN, *args, **kwargs)
     
 logo_world_names = """
