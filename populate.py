@@ -3,43 +3,14 @@
 import time
 from databases import Databases
 import os
-
-program_flow = {
-    1: {
-        "title": "DATABASE\n",
-        "question": "Kies een database: ",
-        "action": "call",
-        "options": f"1. MySQL",
-        "enum": Databases,
-        "option_values": {
-            "1": "mysql"
-        },
-        "assign": "database",
-        "valid": False,
-        "next": 3,
-    },
-    3: {
-            "title": "DATABASE\n",
-            "question": "Kies een database: ",
-            "action": "call",
-            "options": f"1. MySQL",
-            "enum": Databases,
-            "option_values": {
-                "1": "mysql"
-            },
-            "assign": "database",
-            "valid": False,
-            "next": 3,
-    }
-}
-
+from flow import program
 
 class PopulateDatabase:
 
     def __init__(self):
         self.database = None
 
-    def run_program(self):
+    def run_program(self, program_flow):
         _next = 1
         while True:
             os.system("clear")
@@ -66,4 +37,4 @@ class PopulateDatabase:
 
 if __name__ == "__main__":
     pd = PopulateDatabase()
-    pd.run_program()
+    pd.run_program(program)
