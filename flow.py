@@ -6,7 +6,6 @@ import os
 from colorama import Fore, Back, Style, init
 
 program = {
-
     1: {
         "title": "User Populater WorldNames - Een programma om fictieve gebruikers aan te maken",
         "question": "Klik op enter om door te gaan...",
@@ -14,8 +13,6 @@ program = {
         "options": f"",
         "enum": None,
         "option_values": None,
-        "assign": None,
-        "valid": False,
         "next": 2,
         "color":Fore.GREEN,
     },
@@ -29,8 +26,6 @@ program = {
             "1": "mysql",
             "2": "sqlite",
         },
-        "assign": "database",
-        "valid": False,
         "next": 3,
         "color":Fore.GREEN,
     },
@@ -39,13 +34,11 @@ program = {
         "question": "\nKies een database: ",
         "action": "flow",
         "options": f"1. Om opnieuw een simulatie uit te voeren\n2. Om het programma te verlaten",
-        "enum": Databases,
+        "enum": None,
         "option_values": {
             "1": 2,
             "2": -1,
         },
-        "assign": "database",
-        "valid": False,
         "next": 3,
         "color":Fore.GREEN,
     },

@@ -1,71 +1,82 @@
 # Something
 
-from datetime import datetime
-from mysql import connector
-from mysql.connector import cursor as _cursor
-import sys
-sys.path.append("/Users/ayoub/PycharmProjects/HBO-ICT/")
-import worldnames
-import os
-import time
-from tabulate import tabulate
+#Python imports
+import sys, os, time, worldnames
 from uuid import uuid4
+sys.path.append("/Users/ayoub/PycharmProjects/HBO-ICT/")
+# 3th party imports
+from tabulate import tabulate
+from yaspin import yaspin
+from colorama import Fore
+from mysql.connector import cursor as _cursor
 
+
+def custom_print(*args, **kwargs) -> print:
+    print(Fore.GREEN, *args, **kwargs)
 
 class SqlShared:
 
-    headers = ["Voornaam", "Achternaam", "Gender", "Leeftijd", "Email"]
-    users = None
+    headers: list = ["Voornaam", "Achternaam", "Gender", "Leeftijd", "Email"]
+    users: list = None
 
-    def create_table(self, cursor:_cursor, table_name: str="Users", lite=True):
-        if not isinstance(table_name, str):
-            raise BaseException("Table name should be as string")
-        query = f"CREATE TABLE {table_name}(first_name CHAR(255), last_name CHAR(255), gender CHAR(255), age INT, email CHAR(255))"
+    def wait(self, seconds: int) -> None:
+        with yaspin():
+            time.sleep(seconds)
+
+    def create_table(self, cursor:_cursor, table_name: str="Users", lite=True) -> bool:
+        # Test Database maken for MySQL
         if not lite:
-            print("Tijdelijke database maken...")
+            custom_print("Tijdelijke database maken...")
             db_name = uuid4().__str__()[0:10].replace("-", '')
             cursor.execute(f"CREATE DATABASE {db_name}")
             cursor.execute(f"USE {db_name};")
-            print(f"Database: {db_name} aangemaakt")
+            self.wait(1)
+            custom_print(f"Database: {db_name} aangemaakt")
+            self.wait(0.5)
+        # Tabel maken in MySQL of Sqlite test DB
+        custom_print(f"Tabel {table_name} maken...")
+        query = f"CREATE TABLE {table_name}(first_name CHAR(255), last_name CHAR(255), gender CHAR(255), age INT, email CHAR(255))"
         cursor.execute(query)
+        self.wait(1)
+        # Tabellen ophalen voor sqlite of mysql
         if lite:
             cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
         else:
             cursor.execute("SHOW TABLES;")
         tables = [table[0] for table in cursor.fetchall()]
         if table_name in tables:
-            print(f"{table_name} is successvol gemaakt")
-            table_name = table_name
-            return table_name
+            custom_print(f"{table_name} is successvol gemaakt")
+            self.wait(1)
+            return True
         else:
-            print(f"Het is niet gelukt om de tabel {table_name} te maken.")
+            custom_print(f"Het is niet gelukt om de tabel {table_name} te maken.")
+            self.wait(2)
+            return False
 
-    def add_user(self, user: tuple, cursor:_cursor, con, table_name: str="Users"):
-        if not isinstance(table_name, str):
-            raise BaseException("Table name should be as string")
-        print(table_name)
+    def add_user(self, user: tuple, cursor:_cursor, con, table_name: str="Users") -> None:
+        custom_print(f"Gebruiker: {user} toevoegen")
         query = f"INSERT INTO {table_name} (first_name, last_name, gender, age, email) VALUES {user}"
-        print(query)
         cursor.execute(query)
         con.commit()
+        self.wait(0.23)
 
-    def fill_table(self, cursor:_cursor, con, table_name: str="Users", amount_of_users: int = 20):
-        for _time in range(amount_of_users):
+    def fill_table(self, cursor:_cursor, con, table_name: str="Users", amount_of_users: int = 20) -> None:
+        for _ in range(amount_of_users):
             self.add_user(worldnames.user(), cursor, con, table_name)
 
-    def view_users(self, cursor:_cursor, table_name: str = "Users"):
+    def view_users(self, cursor:_cursor, table_name: str = "Users") -> None:
         os.system("clear")
-        print(f"Users for table: {table_name}")
+        custom_print(f"Users for table: {table_name}\n")
         query = f"SELECT * from {table_name}"
         cursor.execute(query)
         res = cursor.fetchall()
         users = res
         self.users = users
-        print(tabulate(res,headers=self.headers,tablefmt="fancy_grid"))
+        custom_print(tabulate(res,headers=self.headers,tablefmt="fancy_grid"))
         input("Klik op enter om verder te gaan...")
 
-    def search_user(self, cursor:_cursor, search_input: str=None, table_name: str = "Users"):
-        print("Typ exit om de zoekfunctie te verlaten\n")
+    def search_user(self, cursor:_cursor, search_input: str=None, table_name: str = "Users") -> None:
+        custom_print("Typ exit om de zoekfunctie te verlaten\n")
         search_input = input("Zoek: ") if not search_input else search_input
         if search_input.lower().strip() == "exit":
             return "exit"
@@ -79,7 +90,8 @@ class SqlShared:
                 result = cursor.fetchall()
                 results = [*results, *result]
         results = set(results)
+        self.wait(0.1)
         os.system("clear")
-        print(f"Gevonden resultaten voor zoekopdracht: {' '.join(search_input)}")
-        print(tabulate(results,headers=self.headers,tablefmt="fancy_grid"))
+        custom_print(f"Gevonden resultaten voor zoekopdracht: {' '.join(search_input)}")
+        custom_print(tabulate(results,headers=self.headers,tablefmt="fancy_grid"))
         input("Enter om verder te gaan...")
