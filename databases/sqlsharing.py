@@ -22,7 +22,7 @@ class SqlShared:
     headers: list = ["Voornaam", "Achternaam", "Gender", "Leeftijd", "Email"]
     users: list = None
 
-    def wait(self, seconds: int) -> None:
+    def wait(self, seconds: int | float) -> None:
         with yaspin():
             time.sleep(seconds)
 
