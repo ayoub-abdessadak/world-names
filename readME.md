@@ -1,3 +1,7 @@
+Random name generator.
+Random email generator.
+Random age generator. 
+
 # Installation manual
 
 1. Clone the repository (**required**)
