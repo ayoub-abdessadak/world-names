@@ -1,21 +1,19 @@
+# Python imports
 from datetime import datetime
-import sqlite3
-import sys
+import sqlite3, os, sys
 sys.path.append("/Users/ayoub/PycharmProjects/HBO-ICT/")
-import worldnames
-import os
-import time
+# 3th party imports
 from tabulate import tabulate
 from worldnames.databases.sqlsharing import SqlShared
 
 class Sqlite(SqlShared):
 
-    def __init__(self, simulation: bool=True):
+    def __init__(self, simulation: bool=True) -> None:
         self.tables = None
         self.table_name = None
-        self.users = None
+        self.users = list()
         if simulation:
-            self.database_name = f"SIMDATABASE-{datetime.now().isoformat()}"
+            self.database_name = f"temp/SIMDATABASE-{datetime.now().isoformat()}"
             file = open(self.database_name, "w")
             file.close()
         else:
@@ -27,32 +25,18 @@ class Sqlite(SqlShared):
             print(f"Create a issue for error {error} on github")
             sys.exit()
 
-    def run(self):
-        self.c_create_table()
-        self.c_fill_table()
-        self.c_view_users()
-        self.c_search_user()
-
-    def c_create_table(self, table_name: str = "Users"):
+    def run(self) -> None:
+        table_name = "Users"
         super().create_table(self.cursor, table_name, True)
-
-    def c_add_user(self, user: tuple, table_name: str="Users"):
-        super().add_user(user, self.cursor, table_name)
-
-    def c_fill_table(self, table_name: str="Users", amount_of_users: int = 20):
-        super().fill_table(self.cursor, self.con, table_name, amount_of_users)
-
-    def c_view_users(self, table_name: str = "Users"):
+        super().fill_table(self.cursor, self.con, table_name, 20)
         super().view_users(self.cursor, table_name)
-
-    def c_search_user(self, search_input: str = None, table_name: str = "Users"):
         while True:
             os.system("clear")
             print(self)
-            _ = super().search_user(self.cursor, search_input, table_name)
+            _ = super().search_user(self.cursor, None, table_name)
             if _:
                 break
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"""{tabulate(self.users,headers=self.headers,tablefmt="fancy_grid")}\n"""
 

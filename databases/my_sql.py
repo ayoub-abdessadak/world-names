@@ -1,14 +1,12 @@
 # Some comment about the application
-
-from mysql import connector
-from mysql.connector import errorcode
-import time
-import os
-import sys
-import sys
+# Python imports
+import time, os, sys
 sys.path.append("/Users/ayoub/PycharmProjects/HBO-ICT/")
 from worldnames.databases.sqlsharing import SqlShared
 from tabulate import tabulate
+from mysql import connector
+#3th part imports
+from mysql.connector import errorcode
 
 operating_system = "unix"
 clear = "clear" if operating_system == "unix" else "cls"
@@ -22,7 +20,7 @@ class MySQL(SqlShared):
     """
     def __init__(self):
         self.connected = False
-        self.users = None
+        self.users = list()
         self.databases = None
         self.validators = {
             'user_name': False,
@@ -92,39 +90,15 @@ class MySQL(SqlShared):
             self.cnx = self.connect()
         return self.cnx.cursor(buffered=True)
 
-    def get_databases(self):
-        if self.databases:
-            return self.databases
-        else:
-            cursor = self.get_cursor()
-            cursor.execute("SHOW DATABASES;")
-            result = cursor.fetchall()
-            self.databases = [database[0] for database in result]
-            self.disconnect()
-
-    def run(self):
-        self.c_create_table()
-        self.c_fill_table()
-        self.c_view_users()
-        self.c_search_user()
-
-    def c_create_table(self, table_name: str = "Users"):
+    def run(self) -> None:
+        table_name = "Users"
         super().create_table(self.get_cursor(), table_name, False)
-
-    def c_add_user(self, user: tuple, table_name: str="Users"):
-        super().add_user(user, self.get_cursor(), table_name)
-
-    def c_fill_table(self, table_name: str="Users", amount_of_users: int = 20):
-        super().fill_table(self.get_cursor(), self.cnx, table_name, amount_of_users)
-
-    def c_view_users(self, table_name: str = "Users"):
+        super().fill_table(self.get_cursor(), self.cnx, table_name, 20)
         super().view_users(self.get_cursor(), table_name)
-
-    def c_search_user(self, search_input: str = None, table_name: str = "Users"):
         while True:
             os.system("clear")
             print(self)
-            _ = super().search_user(self.get_cursor(), search_input, table_name)
+            _ = super().search_user(self.get_cursor(), None, table_name)
             if _:
                 break
 

@@ -12,11 +12,11 @@ console = Console()
 
 class PopulateDatabase:
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.database = None
         self.showed_icon = False
 
-    def run_program(self, program_flow):
+    def run_program(self, program_flow) -> None:
         _next = 1
         while True:
             if _next == -1:
@@ -59,7 +59,7 @@ class PopulateDatabase:
                 _next = flow["next"]
                 continue
 
-    def __logo(self):
+    def __logo(self) -> None:
         if not self.showed_icon:
             self.showed_icon = True
             return logo + icon

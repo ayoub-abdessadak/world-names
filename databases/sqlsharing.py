@@ -73,9 +73,9 @@ class SqlShared:
         users = res
         self.users = users
         custom_print(tabulate(res,headers=self.headers,tablefmt="fancy_grid"))
-        input("Klik op enter om verder te gaan...")
+        input("\nKlik op enter om verder te gaan...")
 
-    def search_user(self, cursor:_cursor, search_input: str=None, table_name: str = "Users") -> None:
+    def search_user(self, cursor:_cursor, search_input: str=None, table_name: str = "Users") -> str:
         custom_print("Typ exit om de zoekfunctie te verlaten\n")
         search_input = input("Zoek: ") if not search_input else search_input
         if search_input.lower().strip() == "exit":
@@ -94,4 +94,4 @@ class SqlShared:
         os.system("clear")
         custom_print(f"Gevonden resultaten voor zoekopdracht: {' '.join(search_input)}")
         custom_print(tabulate(results,headers=self.headers,tablefmt="fancy_grid"))
-        input("Enter om verder te gaan...")
+        input("\nEnter om verder te gaan...")

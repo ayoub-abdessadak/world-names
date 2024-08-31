@@ -1,6 +1,4 @@
-from rich.console import Console
 from rich.text import Text
-import time
 logo_world_names = """
 V1.0 WorldNames  - https://github.com/ayoub-abdessadak/worldnames
                         _      _
@@ -46,8 +44,6 @@ icon_ = """
 	              Written by Ayoub ben Abdessadak
 
 """
-console = Console()
-
 logo = Text(logo_world_names, style="bold green")
 logo.stylize("blink", 7, 12)
 

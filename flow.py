@@ -1,9 +1,7 @@
 # The program itself
 
-import time
 from databases import Databases
-import os
-from colorama import Fore, Back, Style, init
+from colorama import Fore
 
 program = {
     1: {
