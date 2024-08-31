@@ -1,4 +1,5 @@
 # Some comment about the application
+from http.client import responses
 
 from mysql import connector
 from mysql.connector import errorcode
@@ -13,6 +14,8 @@ clear = "clear" if operating_system == "unix" else "cls"
 class MySQL:
 
     def __init__(self):
+        self.connected = False
+        self.databases = None
         self.validators = {
             'user_name': False,
             'password': False,
@@ -69,10 +72,27 @@ class MySQL:
                 return
 
     def connect(self):
+        self.connected = True
         return connector.connect(user=self.user_name, password=self.password, host=self.host, port=self.port)
 
     def disconnect(self):
+        self.connected = False
         self.cnx.close()
+
+    def get_cursor(self):
+        if not self.connected:
+            self.cnx = self.connect()
+        return self.cnx.cursor(buffered=True)
+
+    def get_databases(self):
+        if self.databases:
+            return self.databases
+        else:
+            cursor = self.get_cursor()
+            cursor.execute("SHOW DATABASES;")
+            result = cursor.fetchall()
+            self.databases = [database[0] for database in result]
+            self.disconnect()
 
     def __repr__(self):
         return f"Gebruiker: {self.user_name}\nPassword: {self.password}\nHost: {self.host}\nPoort: {self.port}\nConnection: {'Valid' if self.connection_attempt else 'Invalid'}\n--------------"
