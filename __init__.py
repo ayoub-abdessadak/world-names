@@ -1,4 +1,6 @@
-import random, string, json
+# Module Package for populating random names
+
+import random, json
 from .populatinghelpers import email_domains, letters, genders
 
 class WorldNames:
@@ -24,14 +26,14 @@ class WorldNames:
         _last_name = "".join(letters[0:_max])
         return f"{_last_name[0].upper()}{_last_name[1::].lower()}"
 
-    def age(self):
+    def age(self) -> int:
         return random.randint(0, 120)
 
-    def gender(self):
+    def gender(self) -> str:
         random.shuffle(genders)
         return genders[random.randint(self.min_gender, self.max_gender)]
 
-    def email(self, first_name:str=None, last_name:str=None):
+    def email(self, first_name:str=None, last_name:str=None) -> str:
         random.shuffle(email_domains)
         domain = email_domains[random.randint(self.min_domain, self.max_domain)]
         if not first_name or not last_name:
@@ -39,8 +41,9 @@ class WorldNames:
         else:
             return f"{first_name}.{last_name}@{domain}"
 
-    def user(self):
-        return self.first_name(), self.last_name(), self.gender(), self.age(), self.email()
+    def user(self) -> tuple:
+        fn, ln = self.first_name(), self.last_name()
+        return fn, ln, self.gender(), self.age(), self.email(fn, ln)
 
 world_names = WorldNames()
 full_name = world_names.full_name

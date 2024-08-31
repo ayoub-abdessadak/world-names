@@ -20,71 +20,32 @@ program = {
         "next": 2,
     },
     2: {
-        "title": "Simulatie of Database\n",
-        "question": "Wil je een simulatie runnen of een echte database populeren: ",
-        "action": "flow",
-        "options": f"1. Simulatie (niks voor nodig)\n2. Database (MySQL DB of Sqlite bestand nodig)",
-        "enum": None,
+        "title": "Simulatie (in dit programma wordt een simulatie uitgevoerd voor het populeren van een database)",
+        "question": "Maak een keuze: ",
+        "action": "call",
+        "options": f"1. Simuleren via MySQL\n2. Simuleren via SqlLite",
+        "enum": Databases,
         "option_values": {
-            "1":3,
-            "2":4
+            "1": "mysql",
+            "2": "sqlite",
         },
-        "assign": None,
+        "assign": "database",
         "valid": False,
-        "next": 2,
+        "next": 3,
     },
     3: {
-        "title": "Simulatie\n",
-        "question": "Klik op enter om de simulatie te starten...",
-        "action": "call",
-        "options": f"",
-        "enum": Databases,
-        "option_values": {
-            "1": "sqlite"
-        },
-        "assign": "database",
-        "valid": False,
-        "next": 3,
-    },
-    4: {
-        "title": "Simulatie of Database\n",
-        "question": "Klik op enter om door te gaan...",
-        "action": "flow",
-        "options": f"1. Simulatie (niks voor nodig)\n2. Database (MySQL DB of Sqlite bestand nodig)",
-        "enum": Databases,
-        "option_values": {
-            "1":3,
-            "2":4
-        },
-        "assign": None,
-        "valid": False,
-        "next": 2,
-    },
-    10: {
-        "title": "DATABASE\n",
+        "title": "Simulatie Hoofdmenu\n",
         "question": "Kies een database: ",
-        "action": "call",
-        "options": f"1. MySQL",
+        "action": "flow",
+        "options": f"1. Om opnieuw een simulatie uit te voeren\n2. Om het programma te verlaten",
         "enum": Databases,
         "option_values": {
-            "1": "mysql"
+            "1": 2,
+            "2": -1,
         },
         "assign": "database",
         "valid": False,
         "next": 3,
     },
-    11: {
-            "title": "DATABASE\n",
-            "question": "Kies een database: ",
-            "action": "call",
-            "options": f"1. MySQL",
-            "enum": Databases,
-            "option_values": {
-                "1": "mysql"
-            },
-            "assign": "database",
-            "valid": False,
-            "next": 3,
-    }
 }
 

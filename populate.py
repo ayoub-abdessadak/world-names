@@ -17,24 +17,22 @@ class PopulateDatabase:
     def run_program(self, program_flow):
         _next = 1
         while True:
+            if _next == -1:
+                sys.exit()
             os.system("clear")
             print(self)
             flow = program_flow[_next]
-            if flow["valid"]:
-                _next = flow["next"]
-                continue
             print(flow["title"])
             print(flow["options"])
             choice = input(flow["question"])
             if flow["action"] == "call":
                 output = flow['enum'][flow['option_values'][choice.strip()]].value()
+                output.run()
                 setattr(self, flow['assign'], output)
-                self.__set_valid(flow)
                 _next = flow["next"]
             elif flow["action"] == "flow":
                 try:
                     _next = flow["option_values"][choice.strip()]
-                    self.__set_valid(flow)
                 except KeyError:
                     print("De opgegeven keuze is ongeldig.")
                     time.sleep(2)
