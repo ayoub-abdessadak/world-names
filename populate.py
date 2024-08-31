@@ -20,7 +20,7 @@ class PopulateDatabase:
         _next = 1
         while True:
             if _next == -1:
-                print("Bye :)")
+                print("Doei :)")
                 sys.exit()
 
             flow = program_flow[_next]

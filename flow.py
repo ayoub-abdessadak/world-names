@@ -29,7 +29,7 @@ program = {
     },
     3: {
         "title": "WorldNames Hoofdmenu\n",
-        "question": "\nKies een database: ",
+        "question": "\nKeuze: ",
         "action": "flow",
         "options": f"1. Om opnieuw een simulatie uit te voeren\n2. Om het programma te verlaten",
         "enum": None,
