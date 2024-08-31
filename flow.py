@@ -5,7 +5,62 @@ from databases import Databases
 import os
 
 program = {
+
     1: {
+        "title": "Programma: User Populater WorldNames - Een programma om fictionele gebruikers aan te maken\n",
+        "question": "Klik op enter om door te gaan...",
+        "action": "",
+        "options": f"",
+        "enum": None,
+        "option_values": {
+            "1": "mysql"
+        },
+        "assign": None,
+        "valid": False,
+        "next": 2,
+    },
+    2: {
+        "title": "Simulatie of Database\n",
+        "question": "Wil je een simulatie runnen of een echte database populeren: ",
+        "action": "flow",
+        "options": f"1. Simulatie (niks voor nodig)\n2. Database (MySQL DB of Sqlite bestand nodig)",
+        "enum": None,
+        "option_values": {
+            "1":3,
+            "2":4
+        },
+        "assign": None,
+        "valid": False,
+        "next": 2,
+    },
+    3: {
+        "title": "Simulatie\n",
+        "question": "Klik op enter om de simulatie te starten...",
+        "action": "call",
+        "options": f"",
+        "enum": Databases,
+        "option_values": {
+            "1": "sqlite"
+        },
+        "assign": "database",
+        "valid": False,
+        "next": 3,
+    },
+    4: {
+        "title": "Simulatie of Database\n",
+        "question": "Klik op enter om door te gaan...",
+        "action": "flow",
+        "options": f"1. Simulatie (niks voor nodig)\n2. Database (MySQL DB of Sqlite bestand nodig)",
+        "enum": Databases,
+        "option_values": {
+            "1":3,
+            "2":4
+        },
+        "assign": None,
+        "valid": False,
+        "next": 2,
+    },
+    10: {
         "title": "DATABASE\n",
         "question": "Kies een database: ",
         "action": "call",
@@ -18,7 +73,7 @@ program = {
         "valid": False,
         "next": 3,
     },
-    3: {
+    11: {
             "title": "DATABASE\n",
             "question": "Kies een database: ",
             "action": "call",
@@ -32,26 +87,4 @@ program = {
             "next": 3,
     }
 }
-
-# 1. Introduction to the program, pressing enter will start it
-# 2. Keuze om een simulatie te runnen (bijv geen mysql of niet technisch)
-# 3. keuze om mysql of sqlite zelf te runnen in flow
-
-## De simulatie
-# 1. Creer een sqlite database
-# 2. Creer een tabel
-# 3. tabel vullen met fictionele gebruikers
-# 4. Hoofdmenu met keuze: 1.gebruikers bekijken of 2. gebruike opzoeken obv naam
-
-## Eigen flow (SQL)
-# 1. Verbinden met mysql
-# 2. Database kiezen
-# 3. Tabel maken
-# 4. Gebruikers aanmaken
-
-## Eigen flow (SQL)
-# 1. Verbinden met mysql
-# 2. Database kiezen
-# 3. Tabel maken
-# 4. Gebruikers aanmaken
 
