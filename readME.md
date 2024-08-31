@@ -2,6 +2,10 @@ Random name generator.
 Random email generator.
 Random age generator. 
 
+## Doel van het programma
+Als developer wil je soms je database populeren met gebruikers om testen uit te voeren of een MVP te demonstreren of je hebt simpelweg
+gewoon een random voornaam, achternaam, gender, email of leeftijd nodig. Met dit programma kan je MySQL of SQLite database populeren met gebruikers of de module gebruiken om een eigen populatie programma te maken.
+
 # Installation manual
 
 1. Clone the repository (**required**)
