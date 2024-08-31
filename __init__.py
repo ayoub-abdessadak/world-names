@@ -9,14 +9,14 @@ class WorldNames:
         self.names = json.loads(names_in_json)
         self.min, self.max = 0, len(self.names)-1
 
-    def full_name(self):
+    def full_name(self) -> str:
         return f"{self.first_name()} {self.last_name()}"
 
-    def first_name(self):
+    def first_name(self) -> str:
         random.shuffle(self.names)
         return self.names[random.randint(self.min, self.max)]
 
-    def last_name(self):
+    def last_name(self) -> str:
         _max = random.randint(3, 12)
         random.shuffle(letters)
         _last_name = "".join(letters[0:_max])
