@@ -7,12 +7,15 @@ sys.path.append("/Users/ayoub/PycharmProjects/HBO-ICT/")
 # 3th party imports
 from tabulate import tabulate
 from yaspin import yaspin
-from colorama import Fore
 from mysql.connector import cursor as _cursor
+from rich.console import Console
+from content import logo
+from content import custom_print
 
-
-def custom_print(*args, **kwargs) -> print:
-    print(Fore.GREEN, *args, **kwargs)
+operating_system = "unix"
+clear = "clear" if operating_system == "unix" else "cls"
+console = Console()
+console.print(logo)
 
 class SqlShared:
 
@@ -66,6 +69,7 @@ class SqlShared:
 
     def view_users(self, cursor:_cursor, table_name: str = "Users") -> None:
         os.system("clear")
+        console.print(logo)
         custom_print(f"Users for table: {table_name}\n")
         query = f"SELECT * from {table_name}"
         cursor.execute(query)
@@ -92,6 +96,7 @@ class SqlShared:
         results = set(results)
         self.wait(0.1)
         os.system("clear")
+        console.print(logo)
         custom_print(f"Gevonden resultaten voor zoekopdracht: {' '.join(search_input)}")
         custom_print(tabulate(results,headers=self.headers,tablefmt="fancy_grid"))
         input("\nEnter om verder te gaan...")

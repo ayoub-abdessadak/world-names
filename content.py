@@ -1,4 +1,9 @@
 from rich.text import Text
+from colorama import Fore
+
+def custom_print(*args, **kwargs) -> print:
+    print(Fore.GREEN, *args, **kwargs)
+    
 logo_world_names = """
 V1.0 WorldNames  - https://github.com/ayoub-abdessadak/worldnames
                         _      _

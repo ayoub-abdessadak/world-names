@@ -5,19 +5,20 @@ sys.path.append("/Users/ayoub/PycharmProjects/HBO-ICT/")
 from worldnames.databases.sqlsharing import SqlShared
 from tabulate import tabulate
 from mysql import connector
+from mysql.connector import cursor
 #3th part imports
 from mysql.connector import errorcode
+from rich.console import Console
+from content import logo, icon
+from content import custom_print
 
 operating_system = "unix"
 clear = "clear" if operating_system == "unix" else "cls"
+console = Console()
 
 
 class MySQL(SqlShared):
-    """
 
-        c_ = custom methods for overridden methods in SqlShared
-
-    """
     def __init__(self):
         self.connected = False
         self.users = list()
@@ -31,9 +32,10 @@ class MySQL(SqlShared):
         self.connection_attempt = False
         while True:
             os.system(clear)
-            print("Om een verbinding te kunnen maken met jouw MySQL database. Dien je de volgende informatie in te vullen: \n")
+            console.print(logo)
+            custom_print("Om een verbinding te kunnen maken met jouw MySQL database. Dien je de volgende informatie in te vullen: \n")
             if True in self.validators.values():
-                print(self)
+                custom_print(self)
             if not self.validators['user_name']:
                 self.user_name = input("Gebruikersnaam: ").strip()
                 self.validators['user_name'] = True
@@ -47,45 +49,45 @@ class MySQL(SqlShared):
                 self.port = input("Poort: ").strip()
                 self.validators['port'] = True
             try:
-                print("\nVerbinding maken met MySQL...")
+                custom_print("\nVerbinding maken met MySQL...")
                 self.cnx = self.connect()
             except connector.Error as error:
                 if error.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-                    print("Password or username is invalid!")
+                    custom_print("Password or username is invalid!")
                     self.validators['user_name'] = False
                     self.validators['password'] = False
                     time.sleep(2)
                     continue
                 elif error.errno == errorcode.CR_UNKNOWN_HOST or errorcode.ER_BAD_HOST_ERROR:
-                    print(f"Host {self.host} is invalid!")
+                    custom_print(f"Host {self.host} is invalid!")
                     self.validators['host'] = False
                     time.sleep(2)
                     continue
                 elif error.errno == errorcode.CR_CONN_HOST_ERROR or error.errno == -1:
-                    print(f"Host {self.host} or port {self.port} is invalid!")
+                    custom_print(f"Host {self.host} or port {self.port} is invalid!")
                     self.validators['port'] = False
                     self.validators['host'] = False
                     time.sleep(2)
                     continue
                 else:
-                    print("Something went wrong, create a ISSUE on: https://github.com/ayoub-abdessadak/worldnames/issues")
-                    print(f"ERROR: {error.errno}, {error.msg}, {error}, {error.sqlstate}")
+                    custom_print("Something went wrong, create a ISSUE on: https://github.com/ayoub-abdessadak/worldnames/issues")
+                    custom_print(f"ERROR: {error.errno}, {error.msg}, {error}, {error.sqlstate}")
                     sys.exit()
             else:
-                print("Verbinding successvol")
+                custom_print("Verbinding successvol")
                 self.connection_attempt = True
                 self.disconnect()
                 return
 
-    def connect(self):
+    def connect(self) -> connector:
         self.connected = True
         return connector.connect(user=self.user_name, password=self.password, host=self.host, port=self.port)
 
-    def disconnect(self):
+    def disconnect(self) -> None:
         self.connected = False
         self.cnx.close()
 
-    def get_cursor(self):
+    def get_cursor(self) -> cursor:
         if not self.connected:
             self.cnx = self.connect()
         return self.cnx.cursor(buffered=True)
@@ -97,10 +99,11 @@ class MySQL(SqlShared):
         super().view_users(self.get_cursor(), table_name)
         while True:
             os.system("clear")
-            print(self)
+            console.print(logo)
+            custom_print(self)
             _ = super().search_user(self.get_cursor(), None, table_name)
             if _:
                 break
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"""{tabulate(self.users, headers=self.headers, tablefmt="fancy_grid")}\n"""

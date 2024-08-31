@@ -5,6 +5,14 @@ sys.path.append("/Users/ayoub/PycharmProjects/HBO-ICT/")
 # 3th party imports
 from tabulate import tabulate
 from worldnames.databases.sqlsharing import SqlShared
+from rich.console import Console
+from content import logo
+from content import custom_print
+
+operating_system = "unix"
+clear = "clear" if operating_system == "unix" else "cls"
+console = Console()
+console.print(logo)
 
 class Sqlite(SqlShared):
 
@@ -22,7 +30,7 @@ class Sqlite(SqlShared):
             self.con = sqlite3.connect(self.database_name)
             self.cursor = self.con.cursor()
         except Exception as error:
-            print(f"Create a issue for error {error} on github")
+            custom_print(f"Create a issue for error {error} on github")
             sys.exit()
 
     def run(self) -> None:
@@ -32,7 +40,8 @@ class Sqlite(SqlShared):
         super().view_users(self.cursor, table_name)
         while True:
             os.system("clear")
-            print(self)
+            console.print(logo)
+            custom_print(self)
             _ = super().search_user(self.cursor, None, table_name)
             if _:
                 break
