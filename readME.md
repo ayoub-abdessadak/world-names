@@ -11,7 +11,7 @@ gewoon een random voornaam, achternaam, gender, email of leeftijd nodig. Met dit
 1. Clone the repository (**required**)
 
 ```commandline
-git clone https://github.com/ayoub-abdessadak/worldnames.git
+git clone https://github.com/ayoub-abdessadak/world-names.git
 ```
 
 2. Create a python virtual environment (**optional**)
@@ -23,13 +23,13 @@ python -m venv venvworldnames
 source venvworldnames/bin/activate
 ```
 
-4. Navigate to the repository (worldnames) and install the required packages (**required**)
+4. Navigate to the repository (world-names) and install the required packages (**required**)
 ```commandline
 pip install -r requirments.txt
 ```
 5. Navigate to (src) and run the population simulator 
 ```commandline
-python populate.py
+python -m worldnames.populate
 ```
 Or use the worldnames module to populate you're database:
 

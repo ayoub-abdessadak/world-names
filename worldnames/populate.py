@@ -4,7 +4,7 @@
 import time, os, sys
 
 # 3th party imports
-from flow import program
+from worldnames.flow import program
 from rich.console import Console
 from content import logo, icon
 
