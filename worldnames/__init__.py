@@ -8,7 +8,7 @@ from worldnames.populatinghelpers import email_domains, letters, genders
 
 class WorldNames:
 
-    def __init__(self, file: str = 'something/something.json'):
+    def __init__(self, file: str = 'worldnames/worldnames.json'):
         """
 
         :param file:
@@ -26,7 +26,7 @@ class WorldNames:
         if not names_in_json:
             message = (
                     "file something.json not found. Look in the following directories:\n "
-                    + os.path.abspath("something/something.json")
+                    + os.path.abspath("worldnames/worldnames.json")
                     + "\n "
                     + "\n".join(site_packages)
             )
