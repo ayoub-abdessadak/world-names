@@ -1,6 +1,9 @@
 # The program itself
 
-from databases import Databases
+# Worldnames imports
+from worldnames.databases import Databases
+
+# 3th party imports
 from colorama import Fore
 
 program = {
@@ -9,8 +12,8 @@ program = {
         "question": "Klik op enter om door te gaan...",
         "action": "",
         "options": f"",
-        "enum": None,
         "option_values": None,
+        "enum": None,
         "next": 2,
         "color":Fore.GREEN,
     },
@@ -19,26 +22,26 @@ program = {
         "question": "\nMaak een keuze: ",
         "action": "call",
         "options": f"1. Simuleren via MySQL\n2. Simuleren via SqlLite",
-        "enum": Databases,
         "option_values": {
             "1": "mysql",
             "2": "sqlite",
         },
+        "enum": Databases,
         "next": 3,
-        "color":Fore.GREEN,
+        "color": Fore.GREEN,
     },
     3: {
         "title": "WorldNames Hoofdmenu\n",
         "question": "\nKeuze: ",
         "action": "flow",
         "options": f"1. Om opnieuw een simulatie uit te voeren\n2. Om het programma te verlaten",
-        "enum": None,
         "option_values": {
             "1": 2,
             "2": -1,
         },
+        "enum": None,
         "next": 3,
-        "color":Fore.GREEN,
+        "color": Fore.GREEN,
     },
 }
 

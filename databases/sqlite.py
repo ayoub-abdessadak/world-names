@@ -1,13 +1,17 @@
+# Some comment about the module
+
 # Python imports
 from datetime import datetime
 import sqlite3, os, sys
-sys.path.append("/Users/ayoub/PycharmProjects/HBO-ICT/")
+
 # 3th party imports
 from tabulate import tabulate
-from worldnames.databases.sqlsharing import SqlShared
 from rich.console import Console
-from content import logo
-from content import custom_print
+
+# Worldnames imports
+from worldnames.databases.sqlsharing import SqlShared
+from worldnames.content import logo
+from worldnames.content import custom_print
 
 operating_system = "unix"
 clear = "clear" if operating_system == "unix" else "cls"
@@ -16,7 +20,15 @@ console.print(logo)
 
 class Sqlite(SqlShared):
 
+    """
+
+    """
+
     def __init__(self, simulation: bool=True) -> None:
+        """
+
+        :param simulation:
+        """
         self.tables = None
         self.table_name = None
         self.users = list()
@@ -34,6 +46,10 @@ class Sqlite(SqlShared):
             sys.exit()
 
     def run(self) -> None:
+        """
+
+        :return:
+        """
         table_name = "Users"
         super().create_table(self.cursor, table_name, True)
         super().fill_table(self.cursor, self.con, table_name, 20)
@@ -42,10 +58,14 @@ class Sqlite(SqlShared):
             os.system("clear")
             console.print(logo)
             custom_print(self)
-            _ = super().search_user(self.cursor, None, table_name)
-            if _:
+            _exit = super().search_user(self.cursor, None, table_name)
+            if _exit:
                 break
 
     def __repr__(self) -> str:
+        """
+
+        :return:
+        """
         return f"""{tabulate(self.users,headers=self.headers,tablefmt="fancy_grid")}\n"""
 

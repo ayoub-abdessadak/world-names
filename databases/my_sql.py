@@ -1,16 +1,18 @@
-# Some comment about the application
+# Some comment about the module
+
 # Python imports
 import time, os, sys
-sys.path.append("/Users/ayoub/PycharmProjects/HBO-ICT/")
-from worldnames.databases.sqlsharing import SqlShared
-from tabulate import tabulate
-from mysql import connector
-from mysql.connector import cursor
+
 #3th part imports
-from mysql.connector import errorcode
+from mysql import connector
+from mysql.connector import errorcode, cursor
 from rich.console import Console
-from content import logo
-from content import custom_print
+from tabulate import tabulate
+
+# Worldnames imports
+from worldnames.content import logo
+from worldnames.content import custom_print
+from worldnames.databases.sqlsharing import SqlShared
 
 operating_system = "unix"
 clear = "clear" if operating_system == "unix" else "cls"
@@ -19,7 +21,11 @@ console = Console()
 
 class MySQL(SqlShared):
 
-    def __init__(self):
+    """
+
+    """
+
+    def __init__(self) -> None:
         self.connected = False
         self.users = list()
         self.databases = None
@@ -78,19 +84,35 @@ class MySQL(SqlShared):
                 return
 
     def connect(self) -> connector:
+        """
+
+        :return: a mysql connector
+        """
         self.connected = True
         return connector.connect(user=self.user_name, password=self.password, host=self.host, port=self.port)
 
     def disconnect(self) -> None:
+        """
+
+        :return: None
+        """
         self.connected = False
         self.cnx.close()
 
     def get_cursor(self) -> cursor:
+        """
+
+        :return: a mysql cursor
+        """
         if not self.connected:
             self.cnx = self.connect()
         return self.cnx.cursor(buffered=True)
 
     def run(self) -> None:
+        """
+
+        :return: None
+        """
         table_name = "Users"
         super().create_table(self.get_cursor(), table_name, False)
         super().fill_table(self.get_cursor(), self.cnx, table_name, 20)
@@ -99,9 +121,13 @@ class MySQL(SqlShared):
             os.system("clear")
             console.print(logo)
             custom_print(self)
-            _ = super().search_user(self.get_cursor(), None, table_name)
-            if _:
+            _exit = super().search_user(self.get_cursor(), None, table_name)
+            if _exit:
                 break
 
     def __repr__(self) -> str:
+        """
+
+        :return: string
+        """
         return f"""{tabulate(self.users, headers=self.headers, tablefmt="fancy_grid")}\n"""

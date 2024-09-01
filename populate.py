@@ -1,22 +1,33 @@
-# Some comment about this program
+# Some comment about the module
 
-import time
-from databases import Databases
-import os
+# Python imports
+import time, os, sys
+
+# 3th party imports
 from flow import program
-import sys
 from rich.console import Console
 from content import logo, icon
 
 console = Console()
 
 class PopulateDatabase:
+    """
+
+    """
 
     def __init__(self) -> None:
+        """
+
+        """
         self.database = None
         self.showed_icon = False
 
     def run_program(self, program_flow) -> None:
+        """
+
+        :param program_flow:
+        :return:
+        """
         _next = 1
         while True:
             if _next == -1:
@@ -60,6 +71,10 @@ class PopulateDatabase:
                 continue
 
     def __logo(self) -> None:
+        """
+
+        :return:
+        """
         if not self.showed_icon:
             self.showed_icon = True
             return logo + icon

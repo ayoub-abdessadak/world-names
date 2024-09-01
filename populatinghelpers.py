@@ -1,5 +1,9 @@
+# Some comment about this module
+
+# Python imports
 import string
-email_domains = [
+
+email_domains, letters, genders= [
     "gmail.com",
     "yahoo.com",
     "outlook.com",
@@ -10,9 +14,7 @@ email_domains = [
     "yandex.com",
     "mail.com",
     "zoho.com"
-]
-letters = [letter for letter in string.ascii_lowercase]
-genders = ['Agender',
+], [letter for letter in string.ascii_lowercase], ['Agender',
  'Androgyne',
  'Androgynous',
  'Bigender',

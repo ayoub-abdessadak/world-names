@@ -1,16 +1,19 @@
 # Something
 
 #Python imports
-import sys, os, time, worldnames
+import os, time
 from uuid import uuid4
-sys.path.append("/Users/ayoub/PycharmProjects/HBO-ICT/")
+
 # 3th party imports
 from tabulate import tabulate
 from yaspin import yaspin
 from mysql.connector import cursor as _cursor
 from rich.console import Console
-from content import logo
-from content import custom_print
+
+# Worldnames imports
+import worldnames
+from worldnames.content import logo
+from worldnames.content import custom_print
 
 operating_system = "unix"
 clear = "clear" if operating_system == "unix" else "cls"
@@ -20,13 +23,25 @@ console.print(logo)
 class SqlShared:
 
     headers: list = ["Voornaam", "Achternaam", "Gender", "Leeftijd", "Email"]
-    users: list = None
+    users: list = None # TODO Custom data type in deze list gebruiken
 
     def wait(self, seconds: int | float) -> None:
+        """
+
+        :param seconds:
+        :return:
+        """
         with yaspin():
             time.sleep(seconds)
 
     def create_table(self, cursor:_cursor, table_name: str="Users", lite=True) -> bool:
+        """
+
+        :param cursor:
+        :param table_name:
+        :param lite:
+        :return:
+        """
         # Test Database maken for MySQL
         if not lite:
             custom_print("Tijdelijke database maken...")
@@ -57,6 +72,14 @@ class SqlShared:
             return False
 
     def add_user(self, user: tuple, cursor:_cursor, con, table_name: str="Users") -> None:
+        """
+
+        :param user:
+        :param cursor:
+        :param con:
+        :param table_name:
+        :return:
+        """
         custom_print(f"Gebruiker: {user} toevoegen")
         query = f"INSERT INTO {table_name} (first_name, last_name, gender, age, email) VALUES {user}"
         cursor.execute(query)
@@ -64,10 +87,24 @@ class SqlShared:
         self.wait(0.23)
 
     def fill_table(self, cursor:_cursor, con, table_name: str="Users", amount_of_users: int = 20) -> None:
+        """
+
+        :param cursor:
+        :param con:
+        :param table_name:
+        :param amount_of_users:
+        :return:
+        """
         for _ in range(amount_of_users):
             self.add_user(worldnames.user(), cursor, con, table_name)
 
     def view_users(self, cursor:_cursor, table_name: str = "Users") -> None:
+        """
+
+        :param cursor:
+        :param table_name:
+        :return:
+        """
         os.system("clear")
         console.print(logo)
         custom_print(f"Users for table: {table_name}\n")
@@ -80,6 +117,13 @@ class SqlShared:
         input("\nKlik op enter om verder te gaan...")
 
     def search_user(self, cursor:_cursor, search_input: str=None, table_name: str = "Users") -> str:
+        """
+
+        :param cursor:
+        :param search_input:
+        :param table_name:
+        :return:
+        """
         custom_print("Typ exit om de zoekfunctie te verlaten\n")
         search_input = input("Zoek: ") if not search_input else search_input
         if search_input.lower().strip() == "exit":
