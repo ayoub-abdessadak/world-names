@@ -14,6 +14,7 @@ from rich.console import Console
 import worldnames
 from worldnames.content import logo
 from worldnames.content import custom_print
+from worldnames.database.customdatatypes import User
 
 operating_system = "unix"
 clear = "clear" if operating_system == "unix" else "cls"
@@ -22,25 +23,31 @@ console.print(logo)
 
 class SqlShared:
 
+    """
+    Class with methods that are being used when populating a MySQL or sqlite database.
+    """
+
     headers: list = ["Voornaam", "Achternaam", "Gender", "Leeftijd", "Email"]
-    users: list = None # TODO Custom data type in deze list gebruiken
+    users: list = []
+    custom_users: list = []
 
-    def wait(self, seconds: int | float) -> None:
+    @staticmethod
+    def wait(seconds: int | float) -> None:
         """
-
+        When called I display a spinning icon for the given seconds.
         :param seconds:
-        :return:
+        :return: None
         """
         with yaspin():
             time.sleep(seconds)
 
     def create_table(self, cursor:_cursor, table_name: str="Users", lite=True) -> bool:
         """
-
+        This class method is responsible to create a table in SQL, supports MySQL and Sqlite
         :param cursor:
         :param table_name:
         :param lite:
-        :return:
+        :return: bool, true if created, false if not
         """
         # Test Database maken for MySQL
         if not lite:
@@ -71,15 +78,17 @@ class SqlShared:
             self.wait(2)
             return False
 
-    def add_user(self, user: tuple, cursor:_cursor, con, table_name: str="Users") -> None:
+    def add_user(self, user: tuple | User, cursor:_cursor, con, table_name: str="Users") -> None:
         """
-
-        :param user:
-        :param cursor:
-        :param con:
-        :param table_name:
-        :return:
+        This class method is responsible for adding a user. When called user is added into table destined for that DB.
+        :param user: tuple or User
+        :param cursor: sql cursor
+        :param con: sql connector
+        :param table_name: str
+        :return: none
         """
+        if isinstance(user, User):
+            user = tuple([*user])
         custom_print(f"Gebruiker: {user} toevoegen")
         query = f"INSERT INTO {table_name} (first_name, last_name, gender, age, email) VALUES {user}"
         cursor.execute(query)
@@ -88,22 +97,22 @@ class SqlShared:
 
     def fill_table(self, cursor:_cursor, con, table_name: str="Users", amount_of_users: int = 20) -> None:
         """
-
-        :param cursor:
-        :param con:
-        :param table_name:
-        :param amount_of_users:
-        :return:
+        Class method to fill a table with users, default is 20 users. Users will be populated using the world-names populater
+        :param cursor: sql cursor
+        :param con: sql connector
+        :param table_name: str
+        :param amount_of_users: int
+        :return: None
         """
         for _ in range(amount_of_users):
             self.add_user(worldnames.user(), cursor, con, table_name)
 
     def view_users(self, cursor:_cursor, table_name: str = "Users") -> None:
         """
-
-        :param cursor:
-        :param table_name:
-        :return:
+        Class method to view users that have been populated
+        :param cursor: sql cursor
+        :param table_name: str
+        :return: None
         """
         os.system("clear")
         console.print(logo)
@@ -113,16 +122,17 @@ class SqlShared:
         res = cursor.fetchall()
         users = res
         self.users = users
+        self.custom_users = [User(*user) for user in users]
         custom_print(tabulate(res,headers=self.headers,tablefmt="fancy_grid"))
         input("\nKlik op enter om verder te gaan...")
 
     def search_user(self, cursor:_cursor, search_input: str=None, table_name: str = "Users") -> str:
         """
-
-        :param cursor:
-        :param search_input:
-        :param table_name:
-        :return:
+        Class method that will start an infinite loop and let the user search through the populated users
+        :param cursor: sql cursor
+        :param search_input: str
+        :param table_name: str
+        :return: str (exit)
         """
         custom_print("Typ exit om de zoekfunctie te verlaten\n")
         search_input = input("Zoek: ") if not search_input else search_input

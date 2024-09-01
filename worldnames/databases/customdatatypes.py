@@ -1,17 +1,16 @@
-# Some comment about this module
+# This module contains a custom datatype User, supporting most python operators and other functionalities.
 
 # Python imports
 import numbers
 
 # Worldnames imports
-import worldnames
 from worldnames.exceptions import InvalidDataType, OperatorNotSupported
 
 class User:
 
     def __init__(self, _first_name: str, _last_name: str, gender: str, age: int, email: str):
         """
-
+        The init needs different args to initialize the class. Type checking is not implemented.
         :param _first_name:
         :param _last_name:
         :param age:
@@ -25,6 +24,13 @@ class User:
         self.age = age
         self.email = email
         self.users.add(self)
+
+    def __iter__(self) -> iter:
+        """
+        Supporting iterating for example when unpacking.
+        :return: iterator
+        """
+        return iter((self.first_name, self.last_name, self.gender, self.age, self.email))
 
     def __str__(self):
         return self.__repr__()
