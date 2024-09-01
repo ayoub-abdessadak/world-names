@@ -32,7 +32,7 @@ class WorldNames:
                 pass
         if not names_in_json:
             message = (
-                    "file something.json not found. Look in the following directories:\n "
+                    "file worldnames.json not found. Looked in the following directories:\n "
                     + os.path.abspath("worldnames/worldnames.json")
                     + "\n "
                     + "\n".join(site_packages)

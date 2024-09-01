@@ -23,7 +23,7 @@ class RunJsonProgram:
 
     def run_program(self, program_flow: dict) -> None:
         """
-        The run program method bound to the created instance of PopulatedDatabase runs a program that can be written in JSON.
+        The run program method bound to the created instance of RunJsonProgram runs a program that can be written in JSON.
         See the program in flow.py
         :param program_flow: Program in JSON
         :return: None
