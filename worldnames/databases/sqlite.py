@@ -33,7 +33,7 @@ class Sqlite(SqlShared):
         self.table_name = None
         self.users = list()
         if simulation:
-            self.database_name = f"temp/SIMDATABASE-{datetime.now().isoformat()}"
+            self.database_name = f"SIMDATABASE-{datetime.now().isoformat()}"
             file = open(self.database_name, "w")
             file.close()
         else:
