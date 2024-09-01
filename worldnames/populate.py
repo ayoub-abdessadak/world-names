@@ -4,9 +4,11 @@
 import time, os, sys
 
 # 3th party imports
-from worldnames.flow import program
 from rich.console import Console
-from content import logo, icon
+
+# Worldnames imports
+from worldnames.flow import program
+from worldnames.content import logo, icon
 
 console = Console()
 
