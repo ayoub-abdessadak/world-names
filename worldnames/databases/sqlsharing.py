@@ -14,7 +14,7 @@ from rich.console import Console
 import worldnames
 from worldnames.content import logo
 from worldnames.content import custom_print
-from worldnames.database.customdatatypes import User
+from worldnames.databases.customdatatypes import User
 
 operating_system = "unix"
 clear = "clear" if operating_system == "unix" else "cls"

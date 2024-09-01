@@ -31,7 +31,7 @@ class RunJsonProgram:
         _next = 1
         while True:
             if _next == -1:
-                print("Doei :)")
+                print("Tot ziens :)")
                 sys.exit()
 
             flow = program_flow[_next]
