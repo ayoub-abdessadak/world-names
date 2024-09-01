@@ -1,4 +1,4 @@
-# Some comment about this module
+# This module holds the icon and logo being used in the world-names CLI program as wel as a custom print method for a nicer UI on the CLI
 
 # 3th party imports
 from rich.text import Text

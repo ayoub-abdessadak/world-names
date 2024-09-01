@@ -1,4 +1,4 @@
-# Some comment about this module
+# Some custom exceptions being used for the custom datatype in the databases package
 
 class InvalidDataType(Exception):
 

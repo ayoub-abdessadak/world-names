@@ -1,16 +1,23 @@
-# Module for populating random names
+# The init module for the package world-names creates an instance of the class WorldNames and assigns
+# the bounded methods to variables so they can be accessed while still being Polymorphisme (d)
+# Making the class reusable without having separate functions and rather using object oriented programming.
 
 # Python imports
 import random, json, site, os
 
-# Worldnames imports
+# world-names imports
 from worldnames.populatinghelpers import email_domains, letters, genders
 
 class WorldNames:
 
+    """
+    This class holds static and non static methods for generating a name, age, gender, email or a combination for them all.
+    Most likely to be used for populating a database or running some tests.
+    """
+
     def __init__(self, file: str = 'worldnames/worldnames.json'):
         """
-
+        The initializer needs the file name and the package folder which holds the JSON file.
         :param file:
         """
         site_packages = site.getsitepackages()
@@ -38,15 +45,15 @@ class WorldNames:
 
     def full_name(self) -> str:
         """
-
-        :return:
+        Returns a random first and last name
+        :return: str
         """
         return f"{self.first_name()} {self.last_name()}"
 
     def first_name(self) -> str:
         """
-
-        :return:
+        Returns a random first name
+        :return: str
         """
         random.shuffle(self.names)
         return self.names[random.randint(self.min, self.max)]
@@ -54,8 +61,8 @@ class WorldNames:
     @staticmethod
     def last_name() -> str:
         """
-
-        :return:
+        returns a random last name
+        :return: str
         """
         _max = random.randint(3, 12)
         random.shuffle(letters)
@@ -65,25 +72,25 @@ class WorldNames:
     @staticmethod
     def age() -> int:
         """
-
-        :return:
+        Returns a random age between 0 and 120
+        :return: int
         """
         return random.randint(0, 120)
 
     def gender(self) -> str:
         """
-
-        :return:
+        Returns a random gender
+        :return: str
         """
         random.shuffle(genders)
         return genders[random.randint(self.min_gender, self.max_gender)]
 
     def email(self, _first_name:str=None, _last_name:str=None) -> str:
         """
-
+        Returns a random email
         :param _first_name:
         :param _last_name:
-        :return:
+        :return: str
         """
         random.shuffle(email_domains)
         domain = email_domains[random.randint(self.min_domain, self.max_domain)]
@@ -94,8 +101,8 @@ class WorldNames:
 
     def user(self) -> tuple:
         """
-
-        :return:
+        Returns a random user containing the first_name, last_name, age, gender and email in a tuple.
+        :return: tuple
         """
         fn, ln = self.first_name(), self.last_name()
         return fn, ln, self.gender(), self.age(), self.email(fn, ln)

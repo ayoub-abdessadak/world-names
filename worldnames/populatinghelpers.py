@@ -1,4 +1,4 @@
-# Some comment about this module
+# Some data that is being used in the WorldNames module to generate data
 
 # Python imports
 import string

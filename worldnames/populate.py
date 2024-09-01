@@ -1,4 +1,5 @@
-# Some comment about the module
+# This module runs the RunJsonProgram class and specifically the run_program method bound to an instance of that class.
+# That method contains some conditional statements that causing the program to loop through a dictionary. It can be extended for more functionalities.
 
 # Python imports
 import time, os, sys
@@ -6,29 +7,26 @@ import time, os, sys
 # 3th party imports
 from rich.console import Console
 
-# Worldnames imports
+# world-names imports
 from worldnames.flow import program
 from worldnames.content import logo, icon
 
 console = Console()
 
-class PopulateDatabase:
+class RunJsonProgram:
     """
-
+    This class is written to run a CLI program that can be written in JSON (FROM AN PYTHON MODULE).
     """
-
     def __init__(self) -> None:
-        """
-
-        """
         self.database = None
         self.showed_icon = False
 
-    def run_program(self, program_flow) -> None:
+    def run_program(self, program_flow: dict) -> None:
         """
-
-        :param program_flow:
-        :return:
+        The run program method bound to the created instance of PopulatedDatabase runs a program that can be written in JSON.
+        See the program in flow.py
+        :param program_flow: Program in JSON
+        :return: None
         """
         _next = 1
         while True:
@@ -72,10 +70,10 @@ class PopulateDatabase:
                 _next = flow["next"]
                 continue
 
-    def __logo(self) -> None:
+    def __logo(self) -> str:
         """
-
-        :return:
+        If you call me I will return once an icon and always the worldnames logo. You should print me.
+        :return: str
         """
         if not self.showed_icon:
             self.showed_icon = True
@@ -85,5 +83,5 @@ class PopulateDatabase:
 
 
 if __name__ == "__main__":
-    pd = PopulateDatabase()
-    pd.run_program(program)
+    rjp = RunJsonProgram()
+    rjp.run_program(program)

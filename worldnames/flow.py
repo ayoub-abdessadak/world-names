@@ -1,4 +1,5 @@
-# The program itself
+# This module holds the program written in JSON that's being used in the RunJsonProgram class.
+# The goal is to reduce the amount of conditional statements being used to write a CLI program.
 
 # Worldnames imports
 from worldnames.databases import Databases
