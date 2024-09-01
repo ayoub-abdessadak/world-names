@@ -5,7 +5,7 @@ import numbers
 
 # Worldnames imports
 import worldnames
-from worldnames.exceptions import InvalidDataType
+from worldnames.exceptions import InvalidDataType, OperatorNotSupported
 
 class User:
 
@@ -24,6 +24,7 @@ class User:
         self.gender = gender
         self.age = age
         self.email = email
+        self.users.add(self)
 
     def __str__(self):
         return self.__repr__()
@@ -39,53 +40,64 @@ class User:
         :param other:
         :return:
         """
-        pass
+        if not isinstance(other, User):
+            raise InvalidDataType(f"{other} should be an instance of User not {type(other)}")
+        else:
+            self.users.add(other)
+            return self.users
 
     def __sub__(self, other) -> set:
         """
-        Supports subtraction by number or User.
+        Supports subtraction by User.
 
         :param other:
         :return:
         """
-        pass
+        if not isinstance(other, User):
+            raise InvalidDataType(f"{other} should be an instance of User not {type(other)}")
+        else:
+            self.users.remove(other)
+            return self.users
 
-    def __mul__(self, other) -> set:
+    def __mul__(self, other) -> list:
         """
         Supports multiplication by number or User.
 
         :param other:
         :return:
         """
-        pass
+        if not isinstance(other, User) and not isinstance(other, numbers.Real):
+            raise InvalidDataType(f"{other} should be an instance of User or Number not {type(other)}")
+        else:
+            return list(set) * other.age if isinstance(other, User) else other
 
-    def __truediv__(self, other) -> BaseException:
+    def __truediv__(self, other) -> OperatorNotSupported:
         """
         Does not support true division
 
         :param other:
         :return:
         """
-        pass
+        raise OperatorNotSupported("Division is not supported for User")
 
-    def __floordiv__(self, other) -> BaseException:
+    def __floordiv__(self, other) -> OperatorNotSupported:
         """
         Does not support floor division
         :param other:
         :return:
         """
-        pass
+        raise OperatorNotSupported("Floor division is not supported for User")
 
-    def __mod__(self, other) -> BaseException:
+    def __mod__(self, other) -> OperatorNotSupported:
         """
         Does not support mod
 
         :param other:
         :return:
         """
-        pass
+        raise OperatorNotSupported("Modulus is not supported for User")
 
-    def __pow__(self, power, modulo=None) -> set:
+    def __pow__(self, *args, **kwargs) -> set:
         """
         Possible to pow a User object
 
@@ -93,6 +105,7 @@ class User:
         :param modulo:
         :return:
         """
+        raise OperatorNotSupported("The power of User is not supported")
 
     # Rich comparisons
     def __eq__(self, other) -> bool:
@@ -152,6 +165,3 @@ class User:
 
     def __hash__(self):
         return hash((self.first_name, self.last_name, self.gender, self.age, self.email))
-
-if __name__ == "__main__":
-    obj = User(*worldnames.user())
