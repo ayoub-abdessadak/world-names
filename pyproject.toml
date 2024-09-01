@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "worldnames"
+name = "world-names"
 version = "0.0.3"
 authors = [
   { name="Ayoub ben Abdessadak", email="ayoubabdessadak1@gmail.com" },
@@ -18,5 +18,5 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/ayoub-abdessadak/worldnames"
-Issues = "https://github.com/ayoub-abdessadak/worldnames/issues"
+Homepage = "https://github.com/ayoub-abdessadak/world-names"
+Issues = "https://github.com/ayoub-abdessadak/world-names/issues"
