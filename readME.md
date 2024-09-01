@@ -6,7 +6,7 @@ Random age generator.
 Als developer wil je soms je database populeren met gebruikers om testen uit te voeren of een MVP te demonstreren of je hebt simpelweg
 gewoon een random voornaam, achternaam, gender, email of leeftijd nodig. Met dit programma kan je MySQL of SQLite database populeren met gebruikers of de module gebruiken om een eigen populatie programma te maken.
 
-# Installation manual
+# Installation manual for the Populating program
 
 1. Clone the repository (**required**)
 
@@ -23,7 +23,7 @@ python -m venv worldnames
 source worldnames/bin/activate
 ```
 
-4. Navigate to the repository and install the required packages (**required**)
+4. Navigate to the repository (worldnames/src) and install the required packages (**required**)
 ```commandline
 pip install -r requirments.txt
 ```
@@ -31,8 +31,13 @@ pip install -r requirments.txt
 ```commandline
 python populate.py
 ```
-
 Or use the worldnames module to populate you're database:
+
+1. Install the worldnames module (**required**)
+```commandline
+pip install worldnames
+```
+2. Use the worldnames module in you're python program
 ```python
 import worldnames
 
@@ -52,3 +57,4 @@ worldnames.email('Ashanti', 'Qjtkby') # It is possible to pass a first_name and 
 
 worldnames.user() # Returns all the attributes above in a tuple, for example: ('Cuauhtémoc', 'Sfzn', 'Woman', 88, 'Cuauhtémoc.Sfzn@outlook.com'). Type is an tuple.
 ```
+
