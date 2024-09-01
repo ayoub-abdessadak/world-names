@@ -1,4 +1,4 @@
-# Something
+# This module contains a SqlShared class that's being used in both sqlite and mysql module in the databases package.
 
 #Python imports
 import os, time
