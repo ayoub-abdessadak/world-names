@@ -27,7 +27,7 @@ source venvworldnames/bin/activate
 ```commandline
 pip install -r requirments.txt
 ```
-5. Navigate to (src) and run the population simulator 
+5. Run the population simulator 
 ```commandline
 python -m worldnames.populate
 ```
