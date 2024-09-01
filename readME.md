@@ -16,11 +16,11 @@ git clone https://github.com/ayoub-abdessadak/worldnames.git
 
 2. Create a python virtual environment (**optional**)
 ```commandline
-python -m venv worldnames
+python -m venv venvworldnames
 ```
 3. Activate the python virtual environment (**optional**)
 ```commandline
-source worldnames/bin/activate
+source venvworldnames/bin/activate
 ```
 
 4. Navigate to the repository (worldnames/src) and install the required packages (**required**)
