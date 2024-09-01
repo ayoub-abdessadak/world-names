@@ -23,11 +23,11 @@ python -m venv venvworldnames
 source venvworldnames/bin/activate
 ```
 
-4. Navigate to the repository (worldnames/src) and install the required packages (**required**)
+4. Navigate to the repository (worldnames) and install the required packages (**required**)
 ```commandline
 pip install -r requirments.txt
 ```
-5. Run the population simulator 
+5. Navigate to src and run the population simulator 
 ```commandline
 python populate.py
 ```
