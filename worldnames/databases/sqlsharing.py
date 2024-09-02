@@ -70,7 +70,7 @@ class SqlShared:
             cursor.execute("SHOW TABLES;")
         tables = [table[0] for table in cursor.fetchall()]
         if table_name in tables:
-            custom_print(f"{table_name} is successvol gemaakt")
+            custom_print(f"{table_name} is successvol aangemaakt")
             self.wait(1)
             return True
         else:

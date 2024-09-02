@@ -57,18 +57,13 @@ class MySQL(SqlShared):
                 self.cnx = self.connect()
             except connector.Error as error:
                 if error.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-                    custom_print("Password or username is invalid!")
+                    custom_print("Gebruikersnaam of wachtwoord is ongeldig!")
                     self.validators['user_name'] = False
                     self.validators['password'] = False
                     time.sleep(2)
                     continue
-                elif error.errno == errorcode.CR_UNKNOWN_HOST or errorcode.ER_BAD_HOST_ERROR:
-                    custom_print(f"Host {self.host} is invalid!")
-                    self.validators['host'] = False
-                    time.sleep(2)
-                    continue
-                elif error.errno == errorcode.CR_CONN_HOST_ERROR or error.errno == -1:
-                    custom_print(f"Host {self.host} or port {self.port} is invalid!")
+                elif error.errno in [errorcode.CR_CONN_HOST_ERROR, -1, errorcode.CR_UNKNOWN_HOST, errorcode.ER_BAD_HOST_ERROR]:
+                    custom_print(f"Host {self.host} of poort {self.port} is ongeldig!")
                     self.validators['port'] = False
                     self.validators['host'] = False
                     time.sleep(2)
