@@ -21,7 +21,8 @@ console = Console()
 class MySQL(SqlShared):
 
     """
-    A MySQL class to simulate populating a database using MySQL inheriting from SqlShared containing methods to populate the mysql database.
+    A MySQL class to simulate populating a database using MySQL inheriting from SqlShared containing methods to
+    populate the mysql database.
     """
 
     def __init__(self) -> None:
@@ -38,7 +39,8 @@ class MySQL(SqlShared):
         while True:
             os.system(clear)
             console.print(logo)
-            custom_print("Om een verbinding te kunnen maken met jouw MySQL database. Dien je de volgende informatie in te vullen: \n")
+            custom_print("Om een verbinding te kunnen maken met jouw MySQL database. Dien je de" \
+                         + "volgende informatie in te vullen: \n")
             if not self.validators['user_name']:
                 self.user_name = input("Gebruikersnaam: ").strip()
                 self.validators['user_name'] = True

@@ -58,7 +58,8 @@ class SqlShared:
             self.wait(0.5)
         # Tabel maken in MySQL of Sqlite test DB
         custom_print(f"Tabel {table_name} maken...")
-        query = f"CREATE TABLE {table_name}(first_name CHAR(255), last_name CHAR(255), gender CHAR(255), age INT, email CHAR(255))"
+        query = (f"CREATE TABLE {table_name}(first_name CHAR(255),"+
+                 "last_name CHAR(255), gender CHAR(255), age INT, email CHAR(255))")
         cursor.execute(query)
         self.wait(1)
         # Tabellen ophalen voor sqlite of mysql
@@ -120,7 +121,8 @@ class SqlShared:
         res = cursor.fetchall()
         users = res
         self.users = [User(*user) for user in users] # Custom data type User
-        custom_print(tabulate(self.users, headers=self.headers, tablefmt="fancy_grid")) # The implemented iterator of the custom data type is used by tabulate
+        # The implemented iterator of the custom data type is used by tabulate
+        custom_print(tabulate(self.users, headers=self.headers, tablefmt="fancy_grid"))
         input("\nKlik op enter om verder te gaan...")
 
     def search_user(self, cursor:_cursor, search_input: str=None, table_name: str = "Users") -> str:
