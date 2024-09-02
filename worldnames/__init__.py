@@ -4,7 +4,6 @@
 
 # Python imports
 import random, json, site, os
-
 # world-names imports
 from worldnames.populatinghelpers import email_domains, letters, genders
 

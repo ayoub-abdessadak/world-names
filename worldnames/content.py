@@ -4,6 +4,7 @@
 from rich.text import Text
 from colorama import Fore
 
+# Custom print function
 def custom_print(*args, **kwargs) -> None:
     print(Fore.GREEN, *args, **kwargs)
     

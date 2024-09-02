@@ -2,18 +2,17 @@
 
 # Python imports
 import time, os, sys, platform
-
 # 3th part imports
 from mysql import connector
 from mysql.connector import (errorcode, cursor)
 from rich.console import Console
 from tabulate import tabulate
-
 # Worldnames imports
 from worldnames.content import logo
 from worldnames.content import custom_print
 from worldnames.databases.sqlsharing import SqlShared
 
+# Globals being used in this module
 operating_system = platform.system().lower()
 clear = "clear" if operating_system == "linux" or operating_system == "darwin" else "cls"
 console = Console()

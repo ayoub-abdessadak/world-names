@@ -3,19 +3,18 @@
 #Python imports
 import os, time, platform
 from uuid import uuid4
-
 # 3th party imports
 from tabulate import tabulate
 from yaspin import yaspin
 from mysql.connector import cursor as _cursor
 from rich.console import Console
-
 # Worldnames imports
 import worldnames
 from worldnames.content import logo
 from worldnames.content import custom_print
 from worldnames.databases.customdatatypes import User
 
+# Globals being used in this module
 operating_system = platform.system().lower()
 clear = "clear" if operating_system == "linux" or operating_system == "darwin" else "cls"
 console = Console()

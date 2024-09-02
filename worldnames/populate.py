@@ -1,24 +1,26 @@
+# Auteur: Ayoub ben Abdessadak
 # This module runs the RunJsonProgram class and specifically the run_program method bound to an instance of that class.
 # That method contains some conditional statements that causing the program to loop through a dictionary. It can be extended for more functionalities.
 
 # Python imports
 import time, os, sys, platform
-
 # 3th party imports
 from rich.console import Console
-
 # world-names imports
 from worldnames.flow import program
 from worldnames.content import logo, icon
 
+# globals being used in this module
 operating_system = platform.system().lower()
 clear = "clear" if operating_system == "linux" or operating_system == "darwin" else "cls"
 console = Console()
 
 class RunJsonProgram:
+
     """
     This class is written to run a CLI program that can be written in JSON (FROM AN PYTHON MODULE).
     """
+
     def __init__(self) -> None:
         self.database = None
         self.showed_icon = False
@@ -35,13 +37,11 @@ class RunJsonProgram:
             if _next == -1:
                 print("Tot ziens :)")
                 sys.exit()
-
             flow = program_flow[_next]
             os.system(clear)
             console.print(self.__logo())
             print(flow["color"] + f'''\n{flow["title"]}\n{flow["options"]}''')
             choice = input(flow["question"])
-
             if flow["action"] == "call":
                 try:
                     output = flow['enum'][flow['option_values'][choice.strip()]].value()
@@ -82,7 +82,6 @@ class RunJsonProgram:
             return logo + icon
         else:
             return logo
-
 
 if __name__ == "__main__":
     rjp = RunJsonProgram()

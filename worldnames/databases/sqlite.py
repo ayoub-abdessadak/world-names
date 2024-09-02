@@ -3,16 +3,15 @@
 # Python imports
 from datetime import datetime
 import sqlite3, os, sys, platform
-
 # 3th party imports
 from tabulate import tabulate
 from rich.console import Console
-
 # Worldnames imports
 from worldnames.databases.sqlsharing import SqlShared
 from worldnames.content import logo
 from worldnames.content import custom_print
 
+# Globals being used in this module
 operating_system = platform.system().lower()
 clear = "clear" if operating_system == "linux" or operating_system == "darwin" else "cls"
 console = Console()

@@ -2,7 +2,6 @@
 
 # Python imports
 import numbers
-
 # Worldnames imports
 from worldnames.exceptions import InvalidDataType, OperatorNotSupported
 

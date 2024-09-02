@@ -3,7 +3,6 @@
 
 # Worldnames imports
 from worldnames.databases import Databases
-
 # 3th party imports
 from colorama import Fore
 
