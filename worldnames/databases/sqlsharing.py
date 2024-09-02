@@ -51,8 +51,8 @@ class SqlShared:
         # Test Database maken for MySQL
         if not lite:
             custom_print("Tijdelijke database maken...")
-            db_name = uuid4().__str__()[0:10].replace("-", '')
-            cursor.execute(f"CREATE DATABASE db{db_name}")
+            db_name = "db" + uuid4().__str__()[0:10].replace("-", '')
+            cursor.execute(f"CREATE DATABASE {db_name}")
             cursor.execute(f"USE {db_name};")
             self.wait(1)
             custom_print(f"Database: {db_name} aangemaakt")
