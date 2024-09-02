@@ -1,11 +1,11 @@
 # Some comment about the module
 
 # Python imports
-import time, os, sys
+import time, os, sys, platform
 
 # 3th part imports
 from mysql import connector
-from mysql.connector import errorcode, cursor
+from mysql.connector import (errorcode, cursor)
 from rich.console import Console
 from tabulate import tabulate
 
@@ -14,15 +14,15 @@ from worldnames.content import logo
 from worldnames.content import custom_print
 from worldnames.databases.sqlsharing import SqlShared
 
-operating_system = "unix"
-clear = "clear" if operating_system == "unix" else "cls"
+operating_system = platform.system().lower()
+clear = "clear" if operating_system == "linux" or operating_system == "darwin" else "cls"
 console = Console()
 
 
 class MySQL(SqlShared):
 
     """
-
+    A MySQL class to simulate populating a database using MySQL inheriting from SqlShared containing methods to populate the mysql database.
     """
 
     def __init__(self) -> None:
@@ -85,7 +85,7 @@ class MySQL(SqlShared):
 
     def connect(self) -> connector:
         """
-
+        class method to connect to the mysql database
         :return: a mysql connector
         """
         self.connected = True
@@ -93,7 +93,7 @@ class MySQL(SqlShared):
 
     def disconnect(self) -> None:
         """
-
+        class method to disconnect to the mysql database
         :return: None
         """
         self.connected = False
@@ -101,7 +101,7 @@ class MySQL(SqlShared):
 
     def get_cursor(self) -> cursor:
         """
-
+        class method to lazy retrieve a cursor
         :return: a mysql cursor
         """
         if not self.connected:
@@ -110,7 +110,7 @@ class MySQL(SqlShared):
 
     def run(self) -> None:
         """
-
+        class method to run the populating simulator and start an infinite loop, letting the user search through a table.
         :return: None
         """
         table_name = "Users"
@@ -118,7 +118,7 @@ class MySQL(SqlShared):
         super().fill_table(self.get_cursor(), self.cnx, table_name, 20)
         super().view_users(self.get_cursor(), table_name)
         while True:
-            os.system("clear")
+            os.system(clear)
             console.print(logo)
             custom_print(self)
             _exit = super().search_user(self.get_cursor(), None, table_name)
@@ -127,7 +127,7 @@ class MySQL(SqlShared):
 
     def __repr__(self) -> str:
         """
-
+        printing the table nicely using tabulate
         :return: string
         """
         return f"""{tabulate(self.users, headers=self.headers, tablefmt="fancy_grid")}\n"""

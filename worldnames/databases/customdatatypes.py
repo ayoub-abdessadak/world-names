@@ -42,9 +42,8 @@ class User:
     def __add__(self, other) -> set:
         """
         Supports adding for type User
-
         :param other:
-        :return:
+        :return: set
         """
         if not isinstance(other, User):
             raise InvalidDataType(f"{other} should be an instance of User not {type(other)}")
@@ -55,9 +54,8 @@ class User:
     def __sub__(self, other) -> set:
         """
         Supports subtraction by User.
-
         :param other:
-        :return:
+        :return: set
         """
         if not isinstance(other, User):
             raise InvalidDataType(f"{other} should be an instance of User not {type(other)}")
@@ -68,9 +66,8 @@ class User:
     def __mul__(self, other) -> list:
         """
         Supports multiplication by number or User.
-
         :param other:
-        :return:
+        :return: list
         """
         if not isinstance(other, User) and not isinstance(other, numbers.Real):
             raise InvalidDataType(f"{other} should be an instance of User or Number not {type(other)}")
@@ -80,9 +77,8 @@ class User:
     def __truediv__(self, other) -> OperatorNotSupported:
         """
         Does not support true division
-
         :param other:
-        :return:
+        :return: raises an exception
         """
         raise OperatorNotSupported("Division is not supported for User")
 
@@ -90,26 +86,24 @@ class User:
         """
         Does not support floor division
         :param other:
-        :return:
+        :return: raises an exception
         """
         raise OperatorNotSupported("Floor division is not supported for User")
 
     def __mod__(self, other) -> OperatorNotSupported:
         """
         Does not support mod
-
         :param other:
-        :return:
+        :return: raises an exception
         """
         raise OperatorNotSupported("Modulus is not supported for User")
 
     def __pow__(self, *args, **kwargs) -> set:
         """
-        Possible to pow a User object
-
+        Powering a User is not supported
         :param power:
         :param modulo:
-        :return:
+        :return: raises an exception
         """
         raise OperatorNotSupported("The power of User is not supported")
 

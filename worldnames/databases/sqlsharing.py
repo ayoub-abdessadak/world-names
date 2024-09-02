@@ -1,7 +1,7 @@
 # This module contains a SqlShared class that's being used in both sqlite and mysql module in the databases package.
 
 #Python imports
-import os, time
+import os, time, platform
 from uuid import uuid4
 
 # 3th party imports
@@ -16,8 +16,8 @@ from worldnames.content import logo
 from worldnames.content import custom_print
 from worldnames.databases.customdatatypes import User
 
-operating_system = "unix"
-clear = "clear" if operating_system == "unix" else "cls"
+operating_system = platform.system().lower()
+clear = "clear" if operating_system == "linux" or operating_system == "darwin" else "cls"
 console = Console()
 console.print(logo)
 
@@ -114,7 +114,7 @@ class SqlShared:
         :param table_name: str
         :return: None
         """
-        os.system("clear")
+        os.system(clear)
         console.print(logo)
         custom_print(f"Users for table: {table_name}\n")
         query = f"SELECT * from {table_name}"
@@ -128,7 +128,7 @@ class SqlShared:
 
     def search_user(self, cursor:_cursor, search_input: str=None, table_name: str = "Users") -> str:
         """
-        Class method that will start an infinite loop and let the user search through the populated users
+        Class method that let the user search through a table.
         :param cursor: sql cursor
         :param search_input: str
         :param table_name: str
@@ -149,7 +149,7 @@ class SqlShared:
                 results = [*results, *result]
         results = set(results)
         self.wait(0.1)
-        os.system("clear")
+        os.system(clear)
         console.print(logo)
         custom_print(f"Gevonden resultaten voor zoekopdracht: {' '.join(search_input)}")
         custom_print(tabulate(results,headers=self.headers,tablefmt="fancy_grid"))

@@ -1,6 +1,6 @@
-# The init module for the package world-names creates an instance of the class WorldNames and assigns
+# The init module for the package worldnames creates an instance of the class WorldNames and assigns
 # the bounded methods to variables so they can be accessed while still being Polymorphisme (d)
-# Making the class reusable without having separate functions and rather using object oriented programming.
+# Making the class reusable without having separate functions and rather using object-oriented programming.
 
 # Python imports
 import random, json, site, os

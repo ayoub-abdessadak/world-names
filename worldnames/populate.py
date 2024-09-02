@@ -2,7 +2,7 @@
 # That method contains some conditional statements that causing the program to loop through a dictionary. It can be extended for more functionalities.
 
 # Python imports
-import time, os, sys
+import time, os, sys, platform
 
 # 3th party imports
 from rich.console import Console
@@ -11,6 +11,8 @@ from rich.console import Console
 from worldnames.flow import program
 from worldnames.content import logo, icon
 
+operating_system = platform.system().lower()
+clear = "clear" if operating_system == "linux" or operating_system == "darwin" else "cls"
 console = Console()
 
 class RunJsonProgram:
@@ -35,7 +37,7 @@ class RunJsonProgram:
                 sys.exit()
 
             flow = program_flow[_next]
-            os.system("clear")
+            os.system(clear)
             console.print(self.__logo())
             print(flow["color"] + f'''\n{flow["title"]}\n{flow["options"]}''')
             choice = input(flow["question"])

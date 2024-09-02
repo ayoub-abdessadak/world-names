@@ -2,7 +2,7 @@
 
 # Python imports
 from datetime import datetime
-import sqlite3, os, sys
+import sqlite3, os, sys, platform
 
 # 3th party imports
 from tabulate import tabulate
@@ -13,20 +13,20 @@ from worldnames.databases.sqlsharing import SqlShared
 from worldnames.content import logo
 from worldnames.content import custom_print
 
-operating_system = "unix"
-clear = "clear" if operating_system == "unix" else "cls"
+operating_system = platform.system().lower()
+clear = "clear" if operating_system == "linux" or operating_system == "darwin" else "cls"
 console = Console()
 console.print(logo)
 
 class Sqlite(SqlShared):
 
     """
-
+    Class for sim-populating a sqlite database.
     """
 
     def __init__(self, simulation: bool=True) -> None:
         """
-
+        on init creating a test database or opening an existing database.
         :param simulation:
         """
         self.tables = None
@@ -47,15 +47,15 @@ class Sqlite(SqlShared):
 
     def run(self) -> None:
         """
-
-        :return:
+        class method to run the populating simulator and start an infinite loop, letting the user search through a table.
+        :return: None
         """
         table_name = "Users"
         super().create_table(self.cursor, table_name, True)
         super().fill_table(self.cursor, self.con, table_name, 20)
         super().view_users(self.cursor, table_name)
         while True:
-            os.system("clear")
+            os.system(clear)
             console.print(logo)
             custom_print(self)
             _exit = super().search_user(self.cursor, None, table_name)
@@ -64,8 +64,8 @@ class Sqlite(SqlShared):
 
     def __repr__(self) -> str:
         """
-
-        :return:
+        printing the table nicely using tabulate
+        :return: string
         """
         return f"""{tabulate(self.users,headers=self.headers,tablefmt="fancy_grid")}\n"""
 
