@@ -1,4 +1,4 @@
-# Some comment about the module
+# This module contains a MySQL class thats being used to connect to a MySQL database.
 
 # Python imports
 import time, os, sys, platform

@@ -1,4 +1,4 @@
-# Some comment about the module
+# This module contains a Sqlite class that's being used to create or connect to a sqlite database.
 
 # Python imports
 from datetime import datetime
