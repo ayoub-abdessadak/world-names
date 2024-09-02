@@ -8,6 +8,11 @@ from worldnames.exceptions import InvalidDataType, OperatorNotSupported
 
 class User:
 
+    """
+    This class is a custom data type for fictional users being populated using the worldnames module.
+    Supporting arithmetic and logical operators as well as object comparisons.
+    """
+
     def __init__(self, _first_name: str, _last_name: str, gender: str, age: int, email: str):
         """
         The init needs different args to initialize the class. Type checking is not implemented.

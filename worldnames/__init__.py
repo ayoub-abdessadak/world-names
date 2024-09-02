@@ -11,7 +11,7 @@ from worldnames.populatinghelpers import email_domains, letters, genders
 class WorldNames:
 
     """
-    This class holds static and non static methods for generating a name, age, gender, email or a combination for them all.
+    This class holds static and non-static methods for generating a name, age, gender, email or a combination of them all.
     Most likely to be used for populating a database or running some tests.
     """
 

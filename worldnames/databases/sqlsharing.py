@@ -29,7 +29,6 @@ class SqlShared:
 
     headers: list = ["Voornaam", "Achternaam", "Gender", "Leeftijd", "Email"]
     users: list = []
-    custom_users: list = []
 
     @staticmethod
     def wait(seconds: int | float) -> None:
@@ -121,9 +120,8 @@ class SqlShared:
         cursor.execute(query)
         res = cursor.fetchall()
         users = res
-        self.users = users
-        self.custom_users = [User(*user) for user in users]
-        custom_print(tabulate(res,headers=self.headers,tablefmt="fancy_grid"))
+        self.users = [User(*user) for user in users] # Custom data type User
+        custom_print(tabulate(self.users, headers=self.headers, tablefmt="fancy_grid")) # The implemented iterator of the custom data type is used by tabulate
         input("\nKlik op enter om verder te gaan...")
 
     def search_user(self, cursor:_cursor, search_input: str=None, table_name: str = "Users") -> str:
