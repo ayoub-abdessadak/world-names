@@ -8,7 +8,7 @@ def custom_print(*args, **kwargs) -> None:
     print(Fore.GREEN, *args, **kwargs)
     
 logo_world_names = """
-V1.0 WorldNames  - https://github.com/ayoub-abdessadak/worldnames
+V0.0.4 WorldNames  - https://github.com/ayoub-abdessadak/worldnames
                         _      _
                        | |    | |
 __      __  ___   _ __ | |  __| | _ __    __ _  _ __ ___    ___  ___
