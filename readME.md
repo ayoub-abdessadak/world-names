@@ -25,6 +25,11 @@ python -m venv venvworldnames
 source venvworldnames/bin/activate
 ```
 
+3.1 If you're on windows you can activate the virtual environment as is (**optional**)
+```commandline
+.\venvworldnames\Scripts\activate
+```
+
 4. Navigate to the repository (world-names) and install the required packages (**required**)
 ```commandline
 pip install -r requirments.txt
