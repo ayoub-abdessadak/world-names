@@ -98,13 +98,24 @@ class WorldNames:
         else:
             return f"{_first_name}.{_last_name}@{domain}"
 
+    def phone_number(self) -> str:
+        """
+        Returns:
+            str: A random +31 number
+        """
+        number = [1,2,3,4,5,6,7,8,9]
+        [random.shuffle(number) for _ in range(100)]
+        number = [_.__str__() for _ in number]
+        return "+316" + "".join(number[0:8])
+        
     def user(self) -> tuple:
         """
         Returns a random user containing the first_name, last_name, age, gender and email in a tuple.
         :return: tuple
         """
         fn, ln = self.first_name(), self.last_name()
-        return fn, ln, self.gender(), self.age(), self.email(fn, ln)
+        return fn, ln, self.gender(), self.age(), self.email(fn, ln), self.phone_number()
+    
 
 world_names = WorldNames()
 full_name = world_names.full_name
@@ -113,4 +124,5 @@ last_name = world_names.last_name
 age = world_names.age
 gender = world_names.gender
 email = world_names.email
+phone_number = world_names.phone_number
 user = world_names.user
