@@ -63,5 +63,7 @@ worldnames.email() # returns 'Ashanti.Qjtkbyh@gmail.com' for example. Type is a 
 worldnames.email('Ashanti', 'Qjtkby') # It is possible to pass a first_name and last_name to the email method.
 
 worldnames.user() # Returns all the attributes above in a tuple, for example: ('Cuauhtémoc', 'Sfzn', 'Woman', 88, 'Cuauhtémoc.Sfzn@outlook.com'). Type is an tuple.
+
+worldnames.phone_number() # Returns a random phone number 
 ```
 
